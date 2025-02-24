@@ -7,3 +7,5 @@
 /agent_test.ipynb
 /secrets.json
 /frontend
+/.DS_Store
+/__pycache__/agent.cpython-313.pyc

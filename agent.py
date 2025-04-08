@@ -83,15 +83,9 @@ class AssistantBot:
         with self.client.beta.threads.runs.stream(
             thread_id=self.thread.id,
             assistant_id=self.assistant.id,
-            # instructions="Please address the user as Jane Doe. The user has a premium account.",
             event_handler=handler,
         ) as stream:
             stream.until_done()
-        # run = self.client.beta.threads.runs.create(
-        # thread_id=self.thread.id,
-        # assistant_id=self.assistant.id,
-        # instructions=f"{message}"
-        # )
         return handler.response_text
 
 

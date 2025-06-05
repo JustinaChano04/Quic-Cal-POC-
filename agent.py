@@ -88,19 +88,6 @@ class AssistantBot:
             stream.until_done()
         return handler.response_text
 
-
-# ACTIONS
-def wikipedia(q):
-    return httpx.get(
-        "https://en.wikipedia.org/w/api.php",
-        params={"action": "query", "list": "search", "srsearch": q, "format": "json"},
-    ).json()["query"]["search"][0]["snippet"]
-
-
-def calculate(what):
-    return eval(what)
-
-
 def create_event(event_info):
     event_info = event_info.replace(" ", "")
     SCOPES = ["https://www.googleapis.com/auth/calendar"]
@@ -136,18 +123,14 @@ def create_event(event_info):
     except HttpError as error:
         print(f"An error occurred: {error}")
 
-
 def find_date(date):
     from datetime import date
-
     print("find_date", date.today())
     return date.today()
-
 
 # QUERY
 def query(next_prompt, max_turns=5):
     known_actions = {
-        "wikipedia": wikipedia,
         "create_calendar": create_event,
         "find_date": find_date,
     }
@@ -175,4 +158,6 @@ def query(next_prompt, max_turns=5):
 
 if __name__ == "__main__":
     from datetime import date
-    query("FPAS Discussion for Feb 18th 2025, from 1:00pm to 2:00pm")
+    # query("FPAS Discussion for Feb 18th 2025, from 1:00pm to 2:00pm")
+    event  = "name, 5/31, 1:00, 2:00"
+    create_event(event)

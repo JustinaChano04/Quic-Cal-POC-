@@ -5,7 +5,7 @@
 /test_prompt.txt
 /test.py
 /agent_test.ipynb
-/secrets.json
 /frontend
+/secrets.json
 /.DS_Store
 /__pycache__/agent.cpython-313.pyc

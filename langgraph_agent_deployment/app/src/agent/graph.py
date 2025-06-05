@@ -21,12 +21,23 @@ import asyncio
 # Returns a predefined response. Replace logic and configuration as needed.
 # """
 
+
+
 from dataclasses import dataclass
 from typing import Any, Dict, TypedDict
 
 from langchain_core.runnables import RunnableConfig
 from langgraph.graph import StateGraph
 from langgraph.graph.message import add_messages
+
+class Configuration(TypedDict):
+    """Configurable parameters for the agent.
+
+    Set these when creating assistants OR when invoking the graph.
+    See: https://langchain-ai.github.io/langgraph/cloud/how-tos/configuration_cloud/
+    """
+
+    my_configurable_param: str
 
 @dataclass
 class State(TypedDict):

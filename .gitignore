@@ -9,3 +9,4 @@
 /secrets.json
 /.DS_Store
 /__pycache__/agent.cpython-313.pyc
+/Quic-Cal-Agent/.env

@@ -1,0 +1,45 @@
+volumes:
+    langgraph-data:
+        driver: local
+services:
+    langgraph-redis:
+        image: redis:6
+        healthcheck:
+            test: redis-cli ping
+            interval: 5s
+            timeout: 1s
+            retries: 5
+    langgraph-postgres:
+      image: postgres:16
+      ports:
+        - "5432:5432"
+      env_file: 
+        - .env
+      volumes:
+        - langgraph-data:/var/lib/postgresql/data
+    langgraph-api:
+      build:
+        context: ./src/agent
+        dockerfile: Dockerfile
+      ports:
+          - "8123:8000"
+      depends_on:
+        - calendar-server
+        - date-server
+        - langgraph-redis
+        - langgraph-postgres  
+      env_file:
+        - .env
+
+    date-server:
+      ports:
+        - "4201:4201"
+      build:
+        context: ./date_server
+        dockerfile: Dockerfile
+    calendar-server:
+      ports:
+        - "4200:4200"
+      build:
+        context: ./gcal_server
+        dockerfile: Dockerfile

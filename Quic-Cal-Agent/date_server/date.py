@@ -1,14 +1,8 @@
 # from ollama import chat
-import datetime
-
-from googleapiclient.discovery import build
-from googleapiclient.errors import HttpError
-
-from mcp.server.fastmcp import FastMCP
 from datetime import datetime
+from fastmcp import FastMCP
 from zoneinfo import ZoneInfo
 
-from server_helper import g_cal_connect
 
 mcp = FastMCP("Date")
 
@@ -19,4 +13,4 @@ def get_datetime() -> str:
     return eastern_time
 
 if __name__ == "__main__":
-    mcp.run(transport="stdio")
+    mcp.run(transport="streamable-http", port=4201,host="0.0.0.0", path="/mcp")
